@@ -13,7 +13,6 @@ public class QAApplication {
     public static void main(String[] args) {
         SpringApplication.run(QAApplication.class, args);
         LOGGER.info("Q&A service is running!");
-        LOGGER.info("test");
     }
 
 

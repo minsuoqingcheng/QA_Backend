@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: Q&A
+
+---
+server:
+  port: 10000
