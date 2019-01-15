@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -59,7 +60,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> deleteUserByNickName(String nickName) {
-        User user = getUserByNickName(nickName);
         userDao.deleteByNickName(nickName);
         return userDao.findAll();
     }

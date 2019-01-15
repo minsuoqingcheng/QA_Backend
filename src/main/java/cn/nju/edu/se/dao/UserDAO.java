@@ -14,6 +14,7 @@ public interface UserDAO extends JpaRepository<User, Integer>, JpaSpecificationE
 
     @Transactional
     void deleteByNickName(String nickName);
+
     @Transactional
     User save(User user);
 
