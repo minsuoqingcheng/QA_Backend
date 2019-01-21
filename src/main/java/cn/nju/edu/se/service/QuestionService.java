@@ -1,6 +1,7 @@
 package cn.nju.edu.se.service;
 
 import cn.nju.edu.se.entity.Question;
+import cn.nju.edu.se.vo.AnswerForQuestion;
 
 import java.util.List;
 
@@ -20,6 +21,8 @@ public interface QuestionService {
     List<Question> listAllQuestions();
 
     List<Question> listUserSubmittedQuestions(int userId);
+
+    List<AnswerForQuestion> listUserAnsweredQuestions(int userId);
 
     Question getQuestionById(int questionId);
 }

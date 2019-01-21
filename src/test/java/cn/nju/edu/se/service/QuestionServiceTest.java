@@ -30,10 +30,7 @@ public class QuestionServiceTest {
     private Question testQuestion;
     private User testUser;
 
-
-    @Test
-    public void testSubmitQuestion() {
-
+    private void initial(){
         testQuestion = new Question();
         testQuestion.setTitle("This is a Question?");
         testQuestion.setContent("To be or not to be");
@@ -48,26 +45,19 @@ public class QuestionServiceTest {
 
 
         testQuestion.setUser(testUser);
-        Question savedQuestion = questionService.submitQuestion(testQuestion);
+        testQuestion = questionService.submitQuestion(testQuestion);
+    }
 
-        testQuestion = savedQuestion;
 
-        Assert.assertTrue(savedQuestion.getId() != -1);
+    @Test
+    public void testSubmitQuestion() {
+        initial();
+        Assert.assertTrue(testQuestion.getId() != -1);
     }
 
     @Test
     public void testGetOneQuestion() {
-        testQuestion = new Question();
-        testQuestion.setTitle("This is a Question?");
-        testQuestion.setContent("To be or not to be");
-        testQuestion.setHide(0);
-        testQuestion.setState(1);
-        testQuestion.setTime("2018-01-08 10:53");
-
-        User user = new User();
-        user.setNickName("$testQuestion$*()");
-        user.setGender(0);
-        testUser = userService.addUser(user);
+        initial();
 
         Question question = questionService.getOneQuestion(testQuestion.getId());
         Assert.assertTrue(question.getId() == testQuestion.getId());
@@ -77,6 +67,7 @@ public class QuestionServiceTest {
 
     @Test
     public void testControlQuestion() {
+        initial();
         Question question = questionService.controlQuestion(testQuestion.getId(), 0);
         Assert.assertTrue(question.getState() == 0);
 
@@ -84,24 +75,28 @@ public class QuestionServiceTest {
 
     @Test
     public void testHideQuestion() {
+        initial();
         Question question = questionService.hideQuestion(testQuestion.getId());
         Assert.assertTrue(question.getHide() == 1);
     }
 
     @Test
     public void testListAllQuestions() {
+        initial();
         List<Question> questions = questionService.listAllQuestions();
         Assert.assertTrue(questions.size() > 0);
     }
 
     @Test
     public void testListUserSubmittedQuestions() {
+        initial();
         List<Question> questions = questionService.listUserSubmittedQuestions(testUser.getId());
         Assert.assertTrue(questions.size() > 0);
     }
 
     @Test
     public void testGetQuestionById() {
+        initial();
         Question question = questionService.getQuestionById(testQuestion.getId());
         Assert.assertTrue(question.getId() == testQuestion.getId());
     }
