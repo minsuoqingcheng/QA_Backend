@@ -8,6 +8,8 @@ import cn.nju.edu.se.service.UserMapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class UserMapServiceImpl implements UserMapService {
@@ -33,6 +35,12 @@ public class UserMapServiceImpl implements UserMapService {
     @Override
     public void ignoreUser(int userId, int focusedUserId) {
         userMapDao.deleteUserMapByUserIdAndFocusedUserId(userId, focusedUserId);
+    }
+
+    @Override
+    public Boolean checkUserFocused(int userId, int focusedUserId) {
+        List maps = userMapDao.getAllByUserIdAndFocusedUserId(userId,focusedUserId);
+        return maps.size()>0;
     }
 
 

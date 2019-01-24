@@ -1,9 +1,11 @@
 package cn.nju.edu.se.controller;
 
+import cn.nju.edu.se.entity.Question;
 import cn.nju.edu.se.entity.User;
 import cn.nju.edu.se.entity.UserMap;
 import cn.nju.edu.se.form.UserForm;
 import cn.nju.edu.se.form.UserMapForm;
+import cn.nju.edu.se.service.QuestionService;
 import cn.nju.edu.se.service.UserMapService;
 import cn.nju.edu.se.service.UserService;
 import io.swagger.annotations.ApiOperation;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/user")
@@ -20,6 +23,9 @@ public class UserController {
     private UserService userService;
     @Autowired
     private UserMapService userMapService;
+
+    @Autowired
+    private QuestionService questionService;
 
 
     @RequestMapping(value = "/{nickName}", method = RequestMethod.GET)
@@ -89,6 +95,26 @@ public class UserController {
         int userId = requestBody.getUserId();
         int focusedUserId = requestBody.getFocusedUserId();
         userMapService.ignoreUser(userId,focusedUserId);
+    }
+
+
+    @RequestMapping(value = "/submit", method = RequestMethod.POST)
+    @ApiOperation(value = "提出问题", response = Question.class)
+    public Question submitQuestion(@RequestBody Map<String, String> requestBody){
+        int userId = Integer.parseInt(requestBody.get("userId"));
+        User user = userService.getUserById(userId);
+        String title = requestBody.get("title");
+        String content = requestBody.get("content");
+        String time = requestBody.get("time");
+        int state = Integer.parseInt(requestBody.get("state"));
+        Question question = new Question();
+        question.setTitle(title);
+        question.setContent(content);
+        question.setTime(time);
+        question.setState(state);
+        question.setHide(0);
+        question.setUser(user);
+        return questionService.submitQuestion(question);
     }
 
 
