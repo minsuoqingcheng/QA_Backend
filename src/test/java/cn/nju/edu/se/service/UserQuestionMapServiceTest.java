@@ -39,11 +39,6 @@ public class UserQuestionMapServiceTest {
 
     }
 
-    @Test
-    public void testCheckFocus() {
-
-        Assert.assertTrue(userQuestionMapService.checkFocus(USER_ID,QUESTION_B_ID) == Boolean.FALSE);
-    }
 
     @Test
     public void testUserFocusedQuestions() {
