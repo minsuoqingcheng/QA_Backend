@@ -87,6 +87,7 @@ public class QuestionController {
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     @ApiOperation(value = "查询问题列表方法", response = Question.class, responseContainer = "List")
     public List<Question> getAllQuestions(){
+
         return questionService.listAllQuestions();
     }
 

@@ -99,4 +99,9 @@ public class QuestionServiceImpl implements QuestionService {
     public Question getQuestionById(int questionId) {
         return questionDao.findById(questionId);
     }
+
+    @Override
+    public List<Question> listPartQuestions(int pageNumber) {
+        return null;
+    }
 }

@@ -25,4 +25,6 @@ public interface QuestionService {
     List<AnswerForQuestion> listUserAnsweredQuestions(int userId);
 
     Question getQuestionById(int questionId);
+
+    List<Question> listPartQuestions(int pageNumber);
 }
