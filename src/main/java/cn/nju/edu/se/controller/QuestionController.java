@@ -91,6 +91,18 @@ public class QuestionController {
         return questionService.listAllQuestions();
     }
 
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    @ApiOperation(value = "根据关键字查询问题", response = Question.class, responseContainer = "List")
+    public List<Question> search(@RequestBody Map<String, String> requestBody){
+        String keyword = requestBody.get("keyword");
+        if(keyword.length() == 0){
+            return getAllQuestions();
+        }else{
+            return questionService.search(keyword);
+        }
+
+    }
+
     /**
      * 查询用户所有提问的问题
      * @param requestBody 用户ID

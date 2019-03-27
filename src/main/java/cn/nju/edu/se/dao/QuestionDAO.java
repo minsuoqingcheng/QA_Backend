@@ -21,6 +21,10 @@ public interface QuestionDAO extends JpaRepository<Question, Integer>, JpaSpecif
 
     List<Question> findAllByUserId(int userId);
 
+    List<Question> findAllByTitleLike(String keyword);
+
+    List<Question> findAllByContentLike(String keyword);
+
     Question findById(int id);
 
     @Modifying

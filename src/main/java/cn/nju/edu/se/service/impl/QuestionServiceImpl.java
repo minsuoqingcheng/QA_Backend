@@ -104,4 +104,12 @@ public class QuestionServiceImpl implements QuestionService {
     public List<Question> listPartQuestions(int pageNumber) {
         return null;
     }
+
+    @Override
+    public List<Question> search(String keyword) {
+        List<Question> allByTitleLike = questionDao.findAllByTitleLike("%"+keyword+"%");
+        List<Question> allByContentLike = questionDao.findAllByContentLike("%"+keyword+"%");
+        allByTitleLike.addAll(allByContentLike);
+        return allByTitleLike;
+    }
 }
