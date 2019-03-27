@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class CommentServiceTest {
 
-    private static final int userId = 5;
+    private static final int userId = 15;
     private static final int answerId = 10;
 
     @Autowired

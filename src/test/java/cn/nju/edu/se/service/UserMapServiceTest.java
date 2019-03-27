@@ -16,8 +16,8 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class UserMapServiceTest {
 
-    private static final int USER_A_ID = 10;
-    private static final int USER_B_ID = 11;
+    private static final int USER_A_ID = 12;
+    private static final int USER_B_ID = 13;
 
     @Autowired
     private UserMapService userMapService;

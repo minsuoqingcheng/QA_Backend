@@ -65,7 +65,6 @@ public class AnswerServiceTest {
     @Test
     public void testSubmitAnswer() {
 
-
         initial();
         Assert.assertTrue(testAnswer.getId()!=-1);
 
