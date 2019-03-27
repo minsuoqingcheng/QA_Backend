@@ -27,4 +27,6 @@ public interface QuestionService {
     Question getQuestionById(int questionId);
 
     List<Question> listPartQuestions(int pageNumber);
+
+    List<Question> search(String keyword);
 }
