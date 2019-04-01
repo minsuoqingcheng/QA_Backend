@@ -24,6 +24,9 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/answer")
 public class AnswerController {
+
+    private static final String USER_ID = "useId";
+
     @Autowired
     private AnswerServiceImpl answerService;
 
@@ -39,7 +42,7 @@ public class AnswerController {
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
     @ApiOperation(value = "提交回答", response = Answer.class)
     public Answer submitAnswer(@RequestBody Map<String,String> requestBody){
-        int userId = Integer.parseInt(requestBody.get("userId"));
+        int userId = Integer.parseInt(requestBody.get(USER_ID));
         User user = userService.getUserById(userId);
         int questionId = Integer.parseInt(requestBody.get("questionId"));
         Question question = questionService.getQuestionById(questionId);
@@ -66,7 +69,7 @@ public class AnswerController {
     @RequestMapping(value = "/user/submitted", method = RequestMethod.POST)
     @ApiOperation(value = "获得用户的所有回答", response = Answer.class, responseContainer = "List")
     public List<Answer> listUserAnswers(@RequestBody Map<String,String> requestBody){
-        int userId = Integer.parseInt(requestBody.get("userId"));
+        int userId = Integer.parseInt(requestBody.get(USER_ID));
         return answerService.listAllAnswersForUser(userId);
     }
 
@@ -75,7 +78,7 @@ public class AnswerController {
     @RequestMapping(value = "/user/focused", method = RequestMethod.POST)
     @ApiOperation(value = "获得关注的用户的最新回答", response = Answer.class, responseContainer = "List")
     public List<Answer> getFocusedUserAnswers(@RequestBody Map<String,String> requestBody){
-        int userId = Integer.parseInt(requestBody.get("userId"));
+        int userId = Integer.parseInt(requestBody.get(USER_ID));
         return answerService.listFocusedUserAnswers(userId);
     }
 
@@ -90,7 +93,7 @@ public class AnswerController {
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     @ApiOperation(value = "查询回答详情及是否关注", response = AnswerVO.class)
     public AnswerVO getAnswer(@RequestBody Map<String,String> requestBody){
-        int userId = Integer.parseInt(requestBody.get("userId"));
+        int userId = Integer.parseInt(requestBody.get(USER_ID));
         int answerId = Integer.parseInt(requestBody.get("answerId"));
         Answer answer = answerService.getAnswerById(answerId);
         Boolean answererFocused = userMapService.checkUserFocused(userId, answer.getUser().getId());

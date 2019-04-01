@@ -13,12 +13,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class MySwaggerConfig {
-    public MySwaggerConfig() {
-    }
 
     @Bean
     public Docket customDocket() {
-        return (new Docket(DocumentationType.SWAGGER_2)).apiInfo(this.apiInfo()).useDefaultResponseMessages(false).select().apis((input) -> {
+        return (new Docket(DocumentationType.SWAGGER_2)).apiInfo(this.apiInfo()).useDefaultResponseMessages(false).select().apis(input -> {
             Class<?> declaringClass = input.declaringClass();
             return declaringClass.isAnnotationPresent(RestController.class);
         }).build();

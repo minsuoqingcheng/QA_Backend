@@ -46,7 +46,7 @@ public class UserQuestionMapServiceImpl implements UserQuestionMapService {
     @Override
     public Boolean checkFocus(int userId, int questionId) {
         List<UserQuestionMap> maps = userQuestionMapDao.findAllByUserIdAndQuestionId(userId, questionId);
-        return maps.size()>0;
+        return maps != null && maps.size()>0;
     }
 
     @Override

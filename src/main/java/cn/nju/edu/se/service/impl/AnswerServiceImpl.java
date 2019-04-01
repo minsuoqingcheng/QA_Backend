@@ -44,11 +44,10 @@ public class AnswerServiceImpl implements AnswerService {
         List<UserMap> userMaps = userMapDao.getAllByUserId(userId);
         List<Answer> answers = new ArrayList<>();
         for(UserMap userMap:userMaps){
-//            AnswerForQuestion answerForQuestion = new AnswerForQuestion();
             //获取该用户关注的每一个人
             User focusedUser = userMap.getFocusedUser();
             List<Answer> focusedUserAnswers = answerDao.findAllByUserId(focusedUser.getId());
-            if(focusedUserAnswers.size()>0) {
+            if(focusedUserAnswers != null && focusedUserAnswers.size()>0) {
                 Collections.sort(focusedUserAnswers);
                 for(Answer answer:focusedUserAnswers){
                     if(answer.getHide()==0){
